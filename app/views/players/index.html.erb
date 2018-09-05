@@ -1,0 +1,45 @@
+<h1>All Players</h1>
+
+<div id="table_nav" class="row d-flex justify-content-center">
+  <%= link_to "My Team", my_players_path, class: "" %>
+  <div id="pick_number">
+    <%= label_tag "Select Pick Number" %>
+    <%= select_tag :pick_number, options_for_select(Array(1..10)) %>
+  </div>
+</div>
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">rank</th>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Bye</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each_with_index do |player, index| %>
+      <% if player.my_player && player.drafted %>
+        <tr class="table-success strikeout table-dark" data-id="<%= player.id %>">
+      <% elsif player.drafted %>
+        <tr class="strikeout table-dark" data-id="<%= player.id %>">
+      <% else %>
+        <tr data-id="<%= player.id %>">
+      <% end %>
+          <th scope="row" class="<%= @picks.include?(index + 1) ? "pick_number" : '' %>"><%= index + 1 %></th>
+          <td><%= player.name %></td>
+          <td><%= player.position %></td>
+          <td><%= player.bye %></td>
+          <td>
+            <% if player.drafted || player.my_player %>
+              <%= button_to "Draft Player", "#", class: "btn btn-sm btn-primary draft_player", disabled: true %>
+              <%= button_to "Remove Player", "#", class: "btn btn-sm btn-danger strikeout_player", disabled: true %>
+            <% else %>
+              <%= button_to "Draft Player", "#", class: "btn btn-sm btn-primary draft_player" %>
+              <%= button_to "Remove Player", "#", class: "btn btn-sm btn-danger strikeout_player" %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

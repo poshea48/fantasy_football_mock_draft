@@ -1,0 +1,11 @@
+
+<% if player.nil? %>
+  <%= render 'empty_row' %>
+<% else %>
+  <tr data-id="<%= player.player_id %>">
+    <th scope="row"></th>
+    <td><%= position %></td>
+    <td><%= Player.find_by_id(player.player_id).name %></td>
+    <td><%= Player.find_by_id(player.player_id).bye %></td>
+  </tr>
+<% end %>

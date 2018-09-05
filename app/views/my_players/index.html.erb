@@ -1,0 +1,40 @@
+<h3>Starters</h3>
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">EDIT</th>
+      <th scope="col">POS</th>
+      <th scope="col">PLAYERS</th>
+      <th scope="col">BYE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render 'my_player', player: @qb.first, position: "QB" %>
+    <%= render 'my_player', player: @rbs[0], position: "RB" %>
+    <%= render 'my_player', player: @rbs[1], position: "RB" %>
+
+    <%= render 'my_player', player: @wrs[0], position: "WR" %>
+    <%= render 'my_player', player: @wrs[1], position: "WR" %>
+
+    <%= render 'my_player', player: @rbs_wrs[0], position: "RB/WR" %>
+    <%= render 'my_player', player: @rbs_wrs[1], position: "RB/WR" %>
+    <%= render 'my_player', player: @def.first, position: "DEF" %>
+    <%= render 'my_player', player: @kicker.first, position: "PK" %>
+  </tbody>
+</table>
+<h3>Bench</h3>
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">EDIT</th>
+      <th scope="col">POS</th>
+      <th scope="col">PLAYERS</th>
+      <th scope="col">BYE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bench.each do |p| %>
+      <%= render 'my_player', player: p, position: p.position %>
+    <% end %>
+  </tbody>
+</table>
